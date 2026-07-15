@@ -37,6 +37,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "c83ea697-2f9c-44c4-8573-9c1ee387cc5a"
+      }
+    },
+    "owner": "pheenixtech-team"
   }
 }
