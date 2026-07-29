@@ -1,32 +1,46 @@
-import AntDesign from "@expo/vector-icons/AntDesign";
+import AntDesign from "@react-native-vector-icons/ant-design";
 import { Link, router } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import Button from "../../components/ui/button";
 import { APP_NAME, COLORS, FONT_SIZE } from "../../constants/brand";
+import { signUp } from "../../services/auth";
 
 export default function signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const [accountCreated, setAccountCreated] = useState(false); //Temporary, for Debugging
 
-  const handleSubmit = () => {
-    console.log({
-      name,
-      email,
-      password,
-    });
+  // Signup function
+  const handleSubmit = async () => {
+    // Clear any previous error before trying again
+    setErrorMessage("");
+    setLoading(true);
 
-    setAccountCreated(true);
+    const { user, error } = await signUp(name, email, password);
 
-    setTimeout(() => {
-      router.replace("/profileSetup");
-    }, 2000);
+    setLoading(false);
+
+    if (error) {
+      setErrorMessage(error);
+      return;
+    }
+
+    router.replace("/profileSetup");
   };
 
   return (
     <View style={signupStyle.screen}>
+      {errorMessage && <Text>Testing {errorMessage}</Text>}
       <Text style={signupStyle.introText}>Create your account</Text>
       <Text style={signupStyle.subText}>Takes 2 minutes. No spam. Ever.</Text>
 
@@ -58,7 +72,29 @@ export default function signup() {
           secureTextEntry
         />
 
-        <Button title="Create account" variant="fill" onPress={handleSubmit} />
+        <Button
+          title={
+            loading ? (
+              <ActivityIndicator color={COLORS.white} />
+            ) : (
+              "Create account"
+            )
+          }
+          variant="fill"
+          onPress={handleSubmit}
+        />
+
+        <Button
+          title={
+            loading ? (
+              <ActivityIndicator color={COLORS.white} />
+            ) : (
+              "Open Profile Setup"
+            )
+          }
+          variant="fill"
+          onPress={() => router.replace("/profileSetup")}
+        />
       </View>
 
       <Text style={{ textAlign: "center", marginTop: 20 }}>

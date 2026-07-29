@@ -17,6 +17,11 @@ export default function Layout() {
         name="profileSetup"
         options={{ headerShown: true, title: "Back" }}
       />
+
+      <Stack.Screen
+        name="locationSetup"
+        options={{ headerShown: true, title: "Back" }}
+      />
     </Stack>
   );
 }
