@@ -22,6 +22,10 @@ export default function Layout() {
         name="locationSetup"
         options={{ headerShown: true, title: "Back" }}
       />
+
+      <Stack.Screen name="interestsSetup" options={{ headerShown: false }} />
+
+      <Stack.Screen name="hangoutSetup" options={{ headerShown: false }} />
     </Stack>
   );
 }

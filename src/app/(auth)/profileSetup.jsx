@@ -4,6 +4,7 @@ import { router } from "expo-router";
 import { useState } from "react";
 import {
   ActivityIndicator,
+  Image,
   Pressable,
   StyleSheet,
   Text,
@@ -101,11 +102,18 @@ export default function profileSetup() {
 
       {/* UPLOAD AVATAR */}
       <View style={profileSetupStyle.addImage}>
-        <Pressable style={profileSetupStyle.addImageIcon} onPress={pickImage}>
-          <Ionicons name="person" size={30} color="black" />
+        <Pressable onPress={pickImage} style={profileSetupStyle.addImageIcon}>
+          {imageUri ? (
+            <Image
+              source={{ uri: imageUri }}
+              style={profileSetupStyle.avatarPreview}
+            />
+          ) : (
+            <Ionicons name="person" size={30} color="black" />
+          )}
         </Pressable>
 
-        <Text>Tap to add photo</Text>
+        <Text>{imageUri ? "Tap to change photo" : "Tap to add photo"}</Text>
       </View>
 
       {/* FORM */}
@@ -180,12 +188,24 @@ const profileSetupStyle = StyleSheet.create({
   },
 
   addImageIcon: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 2,
     borderStyle: "dashed",
-    borderRadius: 50,
+    borderRadius: 999,
     borderColor: COLORS.primary,
-    padding: 30,
+    // padding: 30,
     backgroundColor: COLORS.secondary,
+    width: 100,
+    height: 100,
+    overflow: "hidden",
+  },
+
+  avatarPreview: {
+    // borderRadius: 999,
+    width: "100%",
+    height: "100%",
   },
 
   label: {

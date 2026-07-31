@@ -1,6 +1,25 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createClient } from "@supabase/supabase-js";
+import { AppState } from "react-native";
+import "react-native-url-polyfill/auto";
 
 const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
-const supabasePublishableKey = process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+const supabaseKey = process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
-export const supabase = createClient(supabaseUrl, supabasePublishableKey);
+export const supabase = createClient(supabaseUrl, supabaseKey, {
+  auth: {
+    storage: AsyncStorage,
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: false,
+  },
+});
+
+// If the app is active, keep refreshing the session in the background, if the app is backgrounded, stop refreshing to save resources
+AppState.addEventListener("change", (state) => {
+  if (state === "active") {
+    supabase.auth.startAutoRefresh();
+  } else {
+    supabase.auth.stopAutoRefresh();
+  }
+});

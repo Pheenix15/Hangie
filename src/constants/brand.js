@@ -12,7 +12,8 @@ export const COLORS = {
   surface: "#F5F5F5", // TODO: cards, modals, elevated surfaces
 
   text: "#000000", // TODO: primary text color
-  textSecondary: "#858585", // TODO: muted/secondary text
+  textPrimary: "#302d57",
+  textSecondary: "#606060", // TODO: muted/secondary text
   textWhite: "#ffffff", // Text on primary/secondary buttons, etc.
   textSuccess: "#0d6120",
 

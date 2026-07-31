@@ -53,3 +53,6 @@ export async function getSession() {
 
   return { session: data.session, error: null };
 }
+
+// Sign out of every other active session, keeping only this one logged in
+// await supabase.auth.signOut({ scope: "others" }); Uncomment When change password function is added
