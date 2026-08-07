@@ -155,13 +155,7 @@ export default function profileSetup() {
         />
 
         <Button
-          title={
-            loading ? (
-              <ActivityIndicator color={COLORS.white} />
-            ) : (
-              "Skip for now"
-            )
-          }
+          title={"Skip for now"}
           variant="outline"
           onPress={() => router.replace("/(auth)/locationSetup")}
         />

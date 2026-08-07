@@ -2,35 +2,53 @@ import { Slot, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
 
-// Screens reachable without being logged in
 const PUBLIC_ROUTES = ["welcome", "login", "signup"];
+const ONBOARDING_ROUTES = [
+  "profileSetup",
+  "locationSetup",
+  "interestsSetup",
+  "hangoutSetup",
+];
+const UNGATED_ROUTES = ["notificationSetup"]; //Part of onboarding routes but does not trigger redirect
 
 export default function RootLayout() {
-  const { session, loading } = useAuth();
+  const { session, profile, loading } = useAuth();
   const segments = useSegments();
   const router = useRouter();
 
   useEffect(() => {
     if (loading) return;
 
-    // segments[0] is the route group, e.g. "(auth)" or "(tabs)"
-    // segments[1] is the actual screen name inside that group, e.g. "welcome" or "profileSetup"
     const currentScreen = segments[1];
     const isPublicRoute = PUBLIC_ROUTES.includes(currentScreen);
+    const isOnboardingRoute = ONBOARDING_ROUTES.includes(currentScreen);
+    const isUngatedRoute = UNGATED_ROUTES.includes(currentScreen);
 
-    // If user has no session and trying to reach a private route - send to welcome
+    // If is Ungated route, exempt from redirect checks entirely
+    if (isUngatedRoute) return;
+
+    // If there is no session and the current screen is not public, redirect to welcome
     if (!session && !isPublicRoute) {
-      console.log("no active session redirecting...");
-      router.replace("/(auth)/hangoutSetup");
+      router.replace("/(auth)/welcome");
       return;
     }
 
-    // Has a session but sitting on welcome/login/signup - send to feeds instead
-    if (session && isPublicRoute) {
-      console.log("session active redirecting...");
+    // If there is a session and onboarding is not complete and the current screen is not an onboarding screen, redirect to profile setup
+    if (session && !profile?.onboarding_completed && !isOnboardingRoute) {
+      router.replace("/(auth)/profileSetup");
+      console.log(session);
+      return;
+    }
+
+    // If there is a session and onboarding is complete and the current screen is public or an onboarding screen, redirect to feeds
+    if (
+      session &&
+      profile?.onboarding_completed &&
+      (isPublicRoute || isOnboardingRoute)
+    ) {
       router.replace("/(tabs)/feeds");
     }
-  }, [session, loading, segments]);
+  }, [session, profile, loading, segments]);
 
   if (loading) {
     return null;

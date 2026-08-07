@@ -1,4 +1,5 @@
-import { Stack } from "expo-router";
+import { Stack, router } from "expo-router";
+import { Pressable, Text } from "react-native";
 
 export default function Layout() {
   return (
@@ -6,26 +7,86 @@ export default function Layout() {
       <Stack.Screen name="welcome" options={{ headerShown: false }} />
       <Stack.Screen
         name="signup"
-        options={{ headerShown: true, title: "Back" }}
+        options={{
+          title: "",
+          headerTransparent: true,
+          headerLeft: () => (
+            <Pressable onPress={() => router.back()}>
+              <Text>Back</Text>
+            </Pressable>
+          ),
+        }}
       />
+
       <Stack.Screen
         name="login"
-        options={{ headerShown: true, title: "Back" }}
+        options={{
+          title: "",
+          headerTransparent: true,
+          headerLeft: () => (
+            <Pressable onPress={() => router.back()}>
+              <Text>Back</Text>
+            </Pressable>
+          ),
+        }}
+      />
+
+      <Stack.Screen name="profileSetup" options={{ headerShown: false }} />
+
+      <Stack.Screen name="locationSetup" options={{ headerShown: false }} />
+
+      <Stack.Screen
+        name="interestsSetup"
+        options={{
+          title: "",
+          headerTransparent: true,
+          headerLeft: () => (
+            <Pressable onPress={() => router.back()}>
+              <Text>Back</Text>
+            </Pressable>
+          ),
+          headerRight: () => (
+            <Pressable onPress={() => router.push("/hangoutSetup")}>
+              <Text>Skip</Text>
+            </Pressable>
+          ),
+        }}
       />
 
       <Stack.Screen
-        name="profileSetup"
-        options={{ headerShown: true, title: "Back" }}
+        name="hangoutSetup"
+        options={{
+          title: "",
+          headerLeft: () => (
+            <Pressable onPress={() => router.back()}>
+              <Text>Back</Text>
+            </Pressable>
+          ),
+          headerRight: () => (
+            <Pressable onPress={() => router.push("/notificationSetup")}>
+              <Text>Skip</Text>
+            </Pressable>
+          ),
+        }}
       />
 
       <Stack.Screen
-        name="locationSetup"
-        options={{ headerShown: true, title: "Back" }}
+        name="notificationSetup"
+        options={{
+          title: "",
+          headerTransparent: true,
+          headerLeft: () => (
+            <Pressable onPress={() => router.back()}>
+              <Text>Back</Text>
+            </Pressable>
+          ),
+          headerRight: () => (
+            <Pressable onPress={() => router.push("/notificationSetup")}>
+              <Text>Skip</Text>
+            </Pressable>
+          ),
+        }}
       />
-
-      <Stack.Screen name="interestsSetup" options={{ headerShown: false }} />
-
-      <Stack.Screen name="hangoutSetup" options={{ headerShown: false }} />
     </Stack>
   );
 }

@@ -5,14 +5,14 @@ import { getSession } from "../services/auth";
 
 export default function Index() {
   // TEMPORARY - jumps straight to a screen during development, remove before real testing or production
-  useEffect(() => {
-    router.replace("/(auth)/interestsSetup");
-  }, []);
+  // useEffect(() => {
+  //   router.replace("/(auth)/interestsSetup");
+  // }, []);
 
   // Auth check
-  // useEffect(() => {
-  //   checkUserSession();
-  // }, []); Uncomment for real tests
+  useEffect(() => {
+    checkUserSession();
+  }, []);
 
   const checkUserSession = async () => {
     const { session } = await getSession();

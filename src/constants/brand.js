@@ -19,7 +19,7 @@ export const COLORS = {
 
   border: "#000000", // TODO: dividers, input borders
 
-  success: "#E1F5EE", // TODO: success states
+  success: "#02d35d", // TODO: success states
   error: "#bb0101", // TODO: error states
   warning: "#000000", // TODO: warning states
 

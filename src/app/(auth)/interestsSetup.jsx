@@ -87,14 +87,19 @@ export default function interests() {
 
     if (error) {
       setErrorMessage(error);
+
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 4000);
       return;
     }
 
-    router.replace("/(tabs)/feeds");
+    router.replace("/(auth)/hangoutSetup");
   };
 
   return (
     <View style={globalStyles.screen}>
+      {errorMessage && <Text style={globalStyles.error}>{errorMessage}</Text>}
       <View style={interestsSetupStyle.introContainer}>
         <Text style={interestsSetupStyle.introText}>What are you into?</Text>
         <Text style={interestsSetupStyle.subText}>
@@ -159,7 +164,7 @@ export default function interests() {
           }
           variant="fill"
           disabled={selectedIds.length < 3}
-          onPress={() => router.replace("/(auth)/hangoutSetup")}
+          onPress={handleSubmit}
         />
       </View>
     </View>

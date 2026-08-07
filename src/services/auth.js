@@ -1,7 +1,7 @@
+import getErrorMessage from "./errors";
 import { supabase } from "./supabase";
 
-// Creates a new user account and passes the name into user metadata,
-// which the database trigger reads to auto-create the matching profile row
+// Creates a new user account
 export async function signUp(name, email, password) {
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -12,7 +12,10 @@ export async function signUp(name, email, password) {
   });
 
   if (error) {
-    return { user: null, error: error.message };
+    return {
+      user: null,
+      error: getErrorMessage({ message: error.message, status: error.status }),
+    };
   }
 
   return { user: data.user, error: null };

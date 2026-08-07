@@ -11,6 +11,7 @@ import {
 import Button from "../../components/ui/button";
 import { APP_NAME, COLORS, FONT_SIZE } from "../../constants/brand";
 import { signUp } from "../../services/auth";
+import { globalStyles } from "../../styles/global";
 
 export default function signup() {
   const [name, setName] = useState("");
@@ -32,6 +33,11 @@ export default function signup() {
 
     if (error) {
       setErrorMessage(error);
+      console.log(error);
+
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 4000);
       return;
     }
 
@@ -39,8 +45,8 @@ export default function signup() {
   };
 
   return (
-    <View style={signupStyle.screen}>
-      {errorMessage && <Text>Testing {errorMessage}</Text>}
+    <View style={[globalStyles.screen, signupStyle.screen]}>
+      {errorMessage && <Text style={globalStyles.error}>{errorMessage}</Text>}
       <Text style={signupStyle.introText}>Create your account</Text>
       <Text style={signupStyle.subText}>Takes 2 minutes. No spam. Ever.</Text>
 
@@ -127,29 +133,13 @@ export default function signup() {
           Privacy Policy
         </Link>
       </Text>
-
-      {/* DEBUGGING _ Checks if form values are being recieved */}
-      {/* <View>
-        {accountCreated && (
-          <View>
-            <Text>{name}</Text>
-            <Text>{email}</Text>
-            <Text>{password}</Text>
-          </View>
-        )}
-      </View> */}
     </View>
   );
 }
 
 const signupStyle = StyleSheet.create({
   screen: {
-    height: "100%",
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 50,
-    paddingBottom: 30,
-    backgroundColor: COLORS.background,
+    paddingTop: 100,
   },
 
   introText: {

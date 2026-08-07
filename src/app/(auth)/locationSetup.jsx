@@ -48,9 +48,11 @@ export default function locationSetup() {
       const { results, error } = await searchLocations(text);
 
       if (error) {
+        setErrorMessage(error);
+
         setTimeout(() => {
-          setErrorMessage(error);
-        }, 5000);
+          setErrorMessage("");
+        }, 4000);
 
         return;
       }
@@ -81,7 +83,7 @@ export default function locationSetup() {
 
       setTimeout(() => {
         setErrorMessage("");
-      }, 500);
+      }, 4000);
       setLocationLoading(false);
       return;
     }
@@ -94,7 +96,7 @@ export default function locationSetup() {
 
       setTimeout(() => {
         setErrorMessage("");
-      }, 5000);
+      }, 4000);
 
       setLocationLoading(false);
       return;
@@ -119,7 +121,7 @@ export default function locationSetup() {
 
       setTimeout(() => {
         setErrorMessage("");
-      }, 5000);
+      }, 4000);
       setLoading(false);
 
       return;
@@ -133,7 +135,7 @@ export default function locationSetup() {
 
       setTimeout(() => {
         setErrorMessage("");
-      }, 5000);
+      }, 4000);
       setLoading(false);
       return;
     }
@@ -146,7 +148,7 @@ export default function locationSetup() {
 
       setTimeout(() => {
         setErrorMessage("");
-      }, 5000);
+      }, 4000);
 
       setLoading(false);
       return;
@@ -168,14 +170,14 @@ export default function locationSetup() {
 
       setTimeout(() => {
         setErrorMessage("");
-      }, 5000);
+      }, 4000);
 
       setLoading(false);
       return;
     }
 
     setLoading(false);
-    router.replace("/(tabs)/feeds");
+    router.replace("/(auth)/interestsSetup");
   };
 
   return (

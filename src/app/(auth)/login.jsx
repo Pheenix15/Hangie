@@ -5,6 +5,7 @@ import Button from "../../components/ui/button";
 import Input from "../../components/ui/textInput";
 import { COLORS, FONT_SIZE } from "../../constants/brand";
 import { signIn } from "../../services/auth";
+import { globalStyles } from "../../styles/global";
 
 // Icon
 import AntDesign from "@react-native-vector-icons/ant-design";
@@ -34,7 +35,7 @@ export default function login() {
   };
 
   return (
-    <View style={signupStyle.screen}>
+    <View style={[globalStyles.screen, signupStyle.screen]}>
       {errorMessage && <Text color={COLORS.error}>{errorMessage}</Text>}
       <Text style={signupStyle.introText}>Login into your account</Text>
 
@@ -97,12 +98,7 @@ export default function login() {
 
 const signupStyle = StyleSheet.create({
   screen: {
-    height: "100%",
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 50,
-    paddingBottom: 30,
-    backgroundColor: COLORS.background,
+    paddingTop: 100,
   },
 
   introText: {

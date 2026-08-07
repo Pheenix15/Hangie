@@ -87,3 +87,19 @@ export function uploadAvatar(userId, imageUri) {
     xhr.send(formData);
   });
 }
+
+// Saves the user's hangout setting, energy, group size, and free days preferences
+export async function saveHangoutPreferences(userId, preferences) {
+  const { data, error } = await supabase
+    .from("profiles")
+    .update(preferences)
+    .eq("id", userId)
+    .select()
+    .single();
+
+  if (error) {
+    return { profile: null, error: error.message };
+  }
+
+  return { profile: data, error: null };
+}
