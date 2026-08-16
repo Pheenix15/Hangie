@@ -63,6 +63,25 @@ export async function saveUserInterests(userId, interestIds) {
   return { error: null };
 }
 
+// Fetches the interests a user selected during onboarding, joined with their names
+export async function getUserInterests(userId) {
+  const { data, error } = await supabase
+    .from("user_interests")
+    .select("interest_id, interests(id, name)")
+    .eq("user_id", userId);
+
+  //console.log("getUserInterests:", { userId, data, error }); // For Debugging
+
+  if (error) {
+    return { interests: null, error: error.message };
+  }
+
+  // Flatten the joined result so callers just get a clean array of {id, name}
+  const interests = data.map((row) => row.interests);
+
+  return { interests, error: null };
+}
+
 // Adds a new interest under a specific category, created by the current user
 export async function addInterest(name, categoryId, userId) {
   const { data, error } = await supabase

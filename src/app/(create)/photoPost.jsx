@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
 
-export default function addMenuMoal() {
+export default function PhotoPost() {
   return (
     <View>
-      <Text>addMenuMoal</Text>
+      <Text>P</Text>
     </View>
   );
 }

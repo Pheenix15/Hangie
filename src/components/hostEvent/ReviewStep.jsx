@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
 
-export default function Profile() {
+export default function ReviewStep() {
   return (
     <View>
-      <Text>profile</Text>
+      <Text>ReviewStep</Text>
     </View>
   );
 }

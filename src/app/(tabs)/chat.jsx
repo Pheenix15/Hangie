@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
 
-export default function chat() {
+export default function Chat() {
   return (
     <View>
-      <Text>chat</Text>
+      <Text>C</Text>
     </View>
   );
 }

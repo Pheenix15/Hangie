@@ -17,7 +17,7 @@ export const COLORS = {
   textWhite: "#ffffff", // Text on primary/secondary buttons, etc.
   textSuccess: "#0d6120",
 
-  border: "#000000", // TODO: dividers, input borders
+  border: "#b9b9b9", // TODO: dividers, input borders
 
   success: "#02d35d", // TODO: success states
   error: "#bb0101", // TODO: error states

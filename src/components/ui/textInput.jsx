@@ -4,6 +4,7 @@ import { COLORS } from "../../constants/brand";
 export default function Input({
   value,
   onChangeText,
+  onSubmitEditing,
   placeholder,
   secureTextEntry = false,
   keyboardType = "default",
@@ -15,6 +16,7 @@ export default function Input({
       value={value}
       onChangeText={onChangeText}
       placeholder={placeholder}
+      onSubmitEditing={onSubmitEditing}
       secureTextEntry={secureTextEntry}
       keyboardType={keyboardType}
       autoCapitalize={autoCapitalize}

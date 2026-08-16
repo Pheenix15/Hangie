@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
 
-export default function hangout() {
+export default function Hangout() {
   return (
     <View>
-      <Text>hangout</Text>
+      <Text>H</Text>
     </View>
   );
 }

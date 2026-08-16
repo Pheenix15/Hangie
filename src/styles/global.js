@@ -43,4 +43,20 @@ export const globalStyles = StyleSheet.create({
     color: COLORS.textWhite,
     padding: 10,
   },
+
+  aiAssist: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 5,
+    backgroundColor: COLORS.secondary,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+    borderRadius: 15,
+  },
+
+  aiAssistText: {
+    color: COLORS.textPrimary,
+    fontWeight: 600,
+  },
 });
