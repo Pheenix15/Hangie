@@ -25,6 +25,8 @@ export default function HostEvent() {
     vibe: [],
     groupSize: MIN_GROUP_SIZE,
     activities: [],
+    startTime: null,
+    endTime: null,
     // when, where, who fields added as those steps are defined
   });
 

@@ -6,8 +6,7 @@ import { COLORS, FONT_SIZE } from "../constants/brand";
 export const globalStyles = StyleSheet.create({
   screen: {
     height: "100%",
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingHorizontal: 10,
     paddingTop: 50,
     paddingBottom: 30,
     backgroundColor: COLORS.background,

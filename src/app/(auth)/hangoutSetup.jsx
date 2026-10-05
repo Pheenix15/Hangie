@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Button from "../../components/ui/button";
 import { COLORS, FONT_SIZE } from "../../constants/brand";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuthContext } from "../../context/AuthContext";
 import { getSession } from "../../services/auth";
 import { saveHangoutPreferences } from "../../services/profile";
 import { globalStyles } from "../../styles/global";
@@ -21,7 +21,7 @@ export default function hangoutSetup() {
   const [freeDays, setFreeDays] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { refreshProfile } = useAuth();
+  const { refreshProfile } = useAuthContext();
 
   const showError = (message) => {
     setErrorMessage(message);

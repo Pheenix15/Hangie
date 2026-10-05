@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
 
-export default function profile() {
+export default function Maps() {
   return (
     <View>
-      <Text>profile</Text>
+      <Text>Maps</Text>
     </View>
   );
 }

@@ -1,5 +1,8 @@
-import { Slot, useRouter, useSegments } from "expo-router";
+import { Stack, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
+import SidebarShell from "../components/sidebar/SidebarShell";
+import { AuthContext } from "../context/AuthContext";
+import { SidebarProvider } from "../context/SidebarContext";
 import { useAuth } from "../hooks/useAuth";
 
 const PUBLIC_ROUTES = ["welcome", "login", "signup"];
@@ -12,7 +15,8 @@ const ONBOARDING_ROUTES = [
 const UNGATED_ROUTES = ["notificationSetup"]; //Part of onboarding routes but does not trigger redirect
 
 export default function RootLayout() {
-  const { session, profile, loading } = useAuth();
+  const auth = useAuth();
+  const { session, profile, loading } = auth;
   const segments = useSegments();
   const router = useRouter();
 
@@ -46,7 +50,7 @@ export default function RootLayout() {
       profile?.onboarding_completed &&
       (isPublicRoute || isOnboardingRoute)
     ) {
-      router.replace("/(tabs)/feeds");
+      router.replace("/(tabs)/posts");
     }
   }, [session, profile, loading, segments]);
 
@@ -54,5 +58,14 @@ export default function RootLayout() {
     return null;
   }
 
-  return <Slot />;
+  return (
+    <AuthContext.Provider value={auth}>
+      <SidebarProvider>
+        <SidebarShell>
+          {/* Groups(e.g (tabs), (settings)...) stacks untop each other, so a group does not unmount when another group mounts */}
+          <Stack screenOptions={{ headerShown: false }} />
+        </SidebarShell>
+      </SidebarProvider>
+    </AuthContext.Provider>
+  );
 }

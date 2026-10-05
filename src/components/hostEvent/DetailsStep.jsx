@@ -4,13 +4,13 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import DetailsStepSkeleton from "../../components/loading/detailsStepSkeleton";
 import { COLORS, FONT_SIZE } from "../../constants/brand";
 import { MAX_GROUP_SIZE, MIN_GROUP_SIZE } from "../../constants/hangout";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuthContext } from "../../context/AuthContext";
 import { useHostEventOptions } from "../../hooks/useHostEventOptions";
 import Button from "../ui/button";
 import TextInput from "../ui/textInput";
 
 export default function DetailsStep({ formData, updateFormData, onNext }) {
-  const { session } = useAuth();
+  const { session } = useAuthContext();
   const { interests, vibes, loading } = useHostEventOptions(session?.user.id);
   // Holds whatever the host is currently typing into the activity input, cleared after each enter
   const [activityInput, setActivityInput] = useState("");

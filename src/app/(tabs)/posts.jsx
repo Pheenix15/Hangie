@@ -5,7 +5,7 @@ import { COLORS } from "../../constants/brand";
 import { signOut } from "../../services/auth";
 import { globalStyles } from "../../styles/global";
 
-export default function Feeds() {
+export default function Posts() {
   // TEMPORARY: Logout button for testing purposes
   const handleLogout = async () => {
     await signOut();

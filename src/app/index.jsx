@@ -19,7 +19,7 @@ export default function Index() {
 
     // If there's a valid session, send the user straight to their feed
     if (session) {
-      router.replace("/(tabs)/feeds");
+      router.replace("/(tabs)/posts");
       console.log("User is logged in, redirecting to feed...");
       return;
     }

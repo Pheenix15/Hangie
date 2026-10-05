@@ -2,6 +2,8 @@ import Lucide from "@react-native-vector-icons/lucide";
 import { Tabs } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
+import AppHeader from "../../components/header/AppHeader";
+import HeaderActions from "../../components/header/HeaderActions";
 import AddMenuModal from "../../components/modal/addMenuModal";
 import { COLORS } from "../../constants/brand";
 
@@ -10,8 +12,10 @@ export default function TabLayout() {
   return (
     <>
       <Tabs
+        backBehavior="history"
         screenOptions={{
-          headerShown: false,
+          headerShown: true,
+          header: (props) => <AppHeader {...props} />,
           tabBarActiveTintColor: COLORS.primary,
           tabBarInactiveTintColor: COLORS.textSecondary,
           tabBarStyle: {
@@ -24,6 +28,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="hangout"
           options={{
+            headerRight: () => <HeaderActions />,
             title: "Hangout",
             tabBarIcon: ({ color, size }) => (
               <Lucide name="sparkles" size={20} color={color} />
@@ -32,9 +37,11 @@ export default function TabLayout() {
         />
 
         <Tabs.Screen
-          name="profile"
+          name="map"
           options={{
             title: "Map",
+            headerTitle: "Nearby",
+            headerRight: () => <HeaderActions />,
             tabBarIcon: ({ color, size }) => (
               <Lucide name="map" size={20} color={color} />
             ),
@@ -77,6 +84,8 @@ export default function TabLayout() {
           name="chat"
           options={{
             title: "Chat",
+            headerTitle: "Messages",
+            headerRight: () => <HeaderActions />,
             tabBarIcon: ({ color, size }) => (
               <Lucide
                 name="message-square-text"
@@ -88,12 +97,26 @@ export default function TabLayout() {
         />
 
         <Tabs.Screen
-          name="feeds"
+          name="posts"
           options={{
             title: "Posts",
+            headerTitle: "Posts",
+            headerRight: () => <HeaderActions />,
             tabBarIcon: ({ color, size }) => (
               <Lucide name="layout-grid" size={20} color={color} />
             ),
+          }}
+        />
+
+        {/* Hidden Tabs (Basically, the rest of the screens) */}
+
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: "Profile",
+            headerTitle: "My Profile",
+            headerRight: () => <HeaderActions />,
+            href: null, //So profile doesn't show on the tabs list
           }}
         />
       </Tabs>

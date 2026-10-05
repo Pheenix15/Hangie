@@ -10,6 +10,7 @@ export const COLORS = {
 
   background: "#ffffff", // TODO: screen background
   surface: "#F5F5F5", // TODO: cards, modals, elevated surfaces
+  primaryLight: "#EEEDFE", // TODO: light version of primary for banners, etc.
 
   text: "#000000", // TODO: primary text color
   textPrimary: "#302d57",
